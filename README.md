@@ -1,1 +1,1 @@
-# CoReVAD-A-Contextual-Reasoning-Framework-for-Training-Free-Video-Anomaly-Detection
+# CoReVAD: A-Contextual-Reasoning-Framework-for-Training-Free-Video-Anomaly-Detection
