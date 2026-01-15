@@ -31,3 +31,15 @@ XD-Violence
           ├── A.Beautiful.Mind.2001__00-25-20_00-29-20_label_A.mp4
           ├── A.Beautiful.Mind.2001__00-40-52_00-42-01_label_A.mp4
           └── ...
+```
+# Install
+## 0. Clone the repo
+```text
+git clone https://github.com/Muk-00/CoReVAD.git
+cd CoReVAD
+conda create --name CoReVAD python=3.9
+conda activate CoReVAD
+pip install -r requirements.txt
+```
+## 1. Install the environment
+In this paper, we use InternVL2, we follow the official installation instructions provided by InternVL2 ([link](https://internvl.readthedocs.io/en/latest/get_started/installation.html))
