@@ -96,12 +96,12 @@ def process_video(video, clean_response, clip_feature_root_test, vr_len, clip_mo
     y_refined = (weights * y_init[None, :]).sum(axis=1).astype(np.float16)
 
     # Gaussian smoothing
-    y_pred = gaussian_smooth_1d(np.array(y_refined), size, sigma) # Gaussian smoothing (1)
+    y_pred = gaussian_smooth_1d(np.array(y_refined), size, sigma)
     # Flatten
     y_pred = np.repeat(y_pred, frame_len)[:vr_len].astype(np.float16)
-    # Posisition weighting
+    # Position weighting
     sigma1 = int(len(y_pred)*0.5)
-    y_pred = gaussian_smoothing(y_pred, sigma1)    # Gaussian smoothing (2)
+    y_pred = gaussian_smoothing(y_pred, sigma1)
 
     return y_pred
 

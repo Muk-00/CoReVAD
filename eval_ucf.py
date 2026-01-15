@@ -98,12 +98,12 @@ def process_video(video, clean_response, clip_feature_root_test, vr_len, clip_mo
     y_refined = (weights * y_init[None, :]).sum(axis=1).astype(np.float16)
 
     # Gaussian smoothing
-    y_pred = gaussian_smooth_1d(np.array(y_refined), size, sigma) # Gaussian smoothing (1)
+    y_pred = gaussian_smooth_1d(np.array(y_refined), size, sigma)
     # Flatten
     y_pred = np.repeat(y_pred, frame_len)[:vr_len].astype(np.float16)
-    # Posisition weighting
+    # Position weighting
     sigma1 = int(len(y_pred)*0.5)
-    y_pred = gaussian_smoothing(y_pred, sigma1)    # Gaussian smoothing (2)
+    y_pred = gaussian_smoothing(y_pred, sigma1)
 
     return y_pred
 
@@ -120,7 +120,7 @@ def main():
     ap.add_argument("--frame_len",    type=int, default=30)
     args = ap.parse_args()
 
-    args.texts_json  = f"./outputs/VLM_responses_LRC.json" # Ours
+    args.texts_json  = f"./outputs/VLM_responses_LRC.json"
     device = torch.device(args.device if torch.cuda.is_available() else "cpu")
     clip_model, _ = clip.load("ViT-B/16", device=device)
     clip_model.eval()
