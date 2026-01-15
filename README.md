@@ -52,9 +52,13 @@ python extract_clip_features.py
 Output (UCF-Crime): 
 ```text
 CLIP_feats
-    └──ucf_text
+    └──ucf_test
           ├── Abuse028_x264_CLIP_features.npy
           ├── Abuse030_x264_CLIP_features.npy
+          └── ...
+    └──xd_test
+          ├── A.Beautiful.Mind.2001__00-25-20_00-29-20_label_A_CLIP_features.npy
+          ├── A.Beautiful.Mind.2001__00-40-52_00-42-01_label_A_CLIP_features.npy
           └── ...
 ```
 # Inference
