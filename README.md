@@ -1,7 +1,8 @@
 # CoReVAD: A-Contextual-Reasoning-Framework-for-Training-Free-Video-Anomaly-Detection
 
-dlwqkdw;dknwldn
-
+<p align="center">
+  <img src="image/main_framework.png" width="1000">
+</p>
 
 > <b>Abstract: </b>Existing Video Anomaly Detection (VAD) methods typically rely on task-specific training, leading to strong domain dependency and high training costs.
 > Moreover, most existing methods output only scalar anomaly scores, providing limited insight into why specific events are considered abnormal.Recent advances in Vision–
