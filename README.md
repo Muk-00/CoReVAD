@@ -33,7 +33,7 @@ XD-Violence
           └── ...
 ```
 # Install
-## 0. Clone the repo
+## Clone the repo
 ```text
 git clone https://github.com/Muk-00/CoReVAD.git
 cd CoReVAD
@@ -41,5 +41,34 @@ conda create --name CoReVAD python=3.9
 conda activate CoReVAD
 pip install -r requirements.txt
 ```
-## 1. Install the environment
+## Install the environment
 In this paper, we use InternVL2, we follow the official installation instructions provided by InternVL2 ([link](https://internvl.readthedocs.io/en/latest/get_started/installation.html))
+
+# Inference
+## 1. Extract CLIP features
+실험하기에 앞서 우선, 데이터셋의 CLIP vision feature를 추출해야한다.
+```text
+python extract_clip_features.py
+```
+Output (UCF-Crime): 
+```text
+CLIP_feats
+    └──ucf_text
+          ├── Abuse028_x264_CLIP_features.npy
+          ├── Abuse030_x264_CLIP_features.npy
+          └── ...
+```
+## 2. VLM response 출력
+VLM 출력 결과를 json file을 통해 얻을 수 있으며, 우리는 해당 결과인 VLM_responses.json을 제공한다.
+```text
+python generate_VLM_response.py
+```
+## 3. Local Response Cleaning (LRC)
+LRC 결과를 json file을 통해 얻을 수 있으며, 우리는 해당 결과인 VLM_responses_LRC.json을 제공한다.
+```text
+python LRC.py
+```
+## 4. Evaluation
+```text
+eval.py
+```
