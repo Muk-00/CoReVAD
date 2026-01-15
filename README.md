@@ -59,12 +59,12 @@ CLIP_feats
 ```
 # Inference
 ## 1. Generate VLM response
-The VLM responses are obtained in JSON format. We provide the generated responses in ['VLM_responses.json'][].
+The VLM responses are obtained in JSON format.
 ```text
-python generate_VLM_response.py
+python generate_VLM_response_ucf.py
 ```
 ## 2. Local Response Cleaning (LRC)
-The results of Local Response Cleaning (LRC) are saved in JSON format. We also provide the cleaned responses in ['VLM_responses_LRC.json'][].
+The results of Local Response Cleaning (LRC) are saved in JSON format. We provide the generated responses in ['VLM_responses_LRC.json'][] for UCF-Crime and ['VLM_responses_LRC_xd.json'][] for XD-Violence.
 ```text
 python LRC.py
 ```
