@@ -14,3 +14,7 @@
 > Experiments on UCF-Crime and XD-Violence demonstrate that CoReVAD achieves competitive performance among training-free methods while providing reliable and interpretable
 > explanations.
 
+## Data
+For datasets, Please download the original videos from links (GT of each datasets is already included).
+- UCF-Crime: [link](https://www.crcv.ucf.edu/projects/real-world/)
+- XD-Violence: [link](https://roc-ng.github.io/XD-Violence/)
