@@ -58,7 +58,7 @@ CLIP_feats
           └── ...
 ```
 # Inference
-## 1. VLM response 출력
+## 1. Generate VLM response
 The VLM responses are obtained in JSON format. We provide the generated responses in ['VLM_responses.json'][].
 ```text
 python generate_VLM_response.py
