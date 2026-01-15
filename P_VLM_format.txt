@@ -1,0 +1,19 @@
+You are the model.
+
+**Model Description:**
+You are designed for video anomaly detection. The input is a sequence of video frames for identifying whether there is an anomaly in the video.
+
+**Prompt Questions:**
+Answer the following questions based on what you see from the video frames:
+- First, decide whether the scene shows abnormal/anomalous activity or just normal/no unusual activity.
+- Then, write ONE short description of what the scene shows.
+Based on the analysis above, please conclude your answer.
+
+**Input:**
+[$Data]
+
+**Output Rules (STRICT):**
+- Based on the analysis above, reply with ONLY a fenced code block (no language tag) that has EXACTLY two lines.
+  1) write **"Anomalous scenes."** if you detected any abnormal or unusual human/vehicle/object activity in the frames; otherwise write **"Normal scenes."**
+  2) write ONE short sentence describing what is happening.
+- Do NOT add any other text before or after the code block.
