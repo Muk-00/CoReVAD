@@ -18,3 +18,11 @@
 For datasets, Please download the original videos from links (GT of each datasets is already included).
 - UCF-Crime: [link](https://www.crcv.ucf.edu/projects/real-world/)
 - XD-Violence: [link](https://roc-ng.github.io/XD-Violence/)
+
+The test video directory structure is as follows:
+'''text
+UCF-Crime
+    └── videos
+          ├── Abuse028_x264.mp4
+          ├── Abuse030_x264.mp4
+          └── ...
