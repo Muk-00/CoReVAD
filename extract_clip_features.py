@@ -1,5 +1,4 @@
-# CLIP 비전 특징 추출기
-
+import json
 import torch
 import torch.nn.functional as F
 from clip import clip
@@ -86,8 +85,8 @@ def load_selected_video_paths(video_dir, test_path):
         
         video_names = []
         for item in anno_list:
-            v = item["video"]  # 예: "A.Beautiful.Mind.2001__#01-14-30_01-16-59_label_A"
-            v = v.replace("#", "")  # 실제 파일명에는 # 없음
+            v = item["video"]
+            v = v.replace("#", "")
             if not v.endswith(".mp4"):
                 v = v + ".mp4"
             video_names.append(os.path.basename(v))

@@ -36,8 +36,8 @@ def load_selected_video_paths(video_dir, test_path):
         
         video_names = []
         for item in anno_list:
-            v = item["video"]  # 예: "A.Beautiful.Mind.2001__#01-14-30_01-16-59_label_A"
-            v = v.replace("#", "")  # 실제 파일명에는 # 없음
+            v = item["video"]
+            v = v.replace("#", "")
             if not v.endswith(".mp4"):
                 v = v + ".mp4"
             video_names.append(os.path.basename(v))
@@ -146,7 +146,6 @@ if __name__ == "__main__":
     with open('P_VLM_format.txt', 'r', encoding='utf-8') as f:
         Prompt_VLM = f.read()
 
-    # 1) 모델/토크나이저 로드
     model = AutoModel.from_pretrained(mllm_path, torch_dtype=torch.bfloat16, low_cpu_mem_usage=True,
         use_flash_attn=True, trust_remote_code=True).to(device).eval()
     tokenizer = AutoTokenizer.from_pretrained(mllm_path, trust_remote_code=True, use_fast=False)
