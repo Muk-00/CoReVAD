@@ -81,3 +81,5 @@ Evaluation for XD-Violence dataset
 ```text
 eval_xd.py
 ```
+# Acknowledgements
+Thanks to [Ye et al.](https://github.com/vera-framework/VERA) for sharing their code.
