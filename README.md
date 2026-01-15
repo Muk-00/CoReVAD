@@ -69,6 +69,11 @@ The results of Local Response Cleaning (LRC) are saved in JSON format. We also p
 python LRC.py
 ```
 ## 3. Evaluation
+Evaluation for UCF-Crime dataset
 ```text
-eval.py
+eval_ucf.py
+```
+Evaluation for XD-Violence dataset
+```text
+eval_xd.py
 ```
