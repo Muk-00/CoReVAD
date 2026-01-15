@@ -44,9 +44,8 @@ pip install -r requirements.txt
 ## Install the environment
 In this paper, we use InternVL2, we follow the official installation instructions provided by InternVL2 ([link](https://internvl.readthedocs.io/en/latest/get_started/installation.html))
 
-# Inference
-## 1. Extract CLIP features
-실험하기에 앞서 우선, 데이터셋의 CLIP vision feature를 추출해야한다.
+## Extract CLIP features
+We first CLIP vision features from the dataset.
 ```text
 python extract_clip_features.py
 ```
@@ -58,17 +57,18 @@ CLIP_feats
           ├── Abuse030_x264_CLIP_features.npy
           └── ...
 ```
-## 2. VLM response 출력
-VLM 출력 결과를 json file을 통해 얻을 수 있으며, 우리는 해당 결과인 VLM_responses.json을 제공한다.
+# Inference
+## 1. VLM response 출력
+The VLM responses are obtained in JSON format. We provide the generated responses in ['VLM_responses.json'][].
 ```text
 python generate_VLM_response.py
 ```
-## 3. Local Response Cleaning (LRC)
-LRC 결과를 json file을 통해 얻을 수 있으며, 우리는 해당 결과인 VLM_responses_LRC.json을 제공한다.
+## 2. Local Response Cleaning (LRC)
+The results of Local Response Cleaning (LRC) are saved in JSON format. We also provide the cleaned responses in ['VLM_responses_LRC.json'][].
 ```text
 python LRC.py
 ```
-## 4. Evaluation
+## 3. Evaluation
 ```text
 eval.py
 ```
