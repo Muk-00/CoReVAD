@@ -32,7 +32,7 @@ XD-Violence
           ├── A.Beautiful.Mind.2001__00-40-52_00-42-01_label_A.mp4
           └── ...
 ```
-# Install
+# Setup
 ## Clone the repo
 ```text
 git clone https://github.com/Muk-00/CoReVAD.git
