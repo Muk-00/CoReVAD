@@ -1,5 +1,7 @@
 # CoReVAD: A Contextual Reasoning Framework for Training-Free Video Anomaly Detection
 
+Official PyTorch implementation of "CoReVAD: A Contextual Reasoning Framework for Training-Free Video Anomaly Detection" (ICPR 2026) by Hyeongmuk Lim and [Youngbum Hur](https://sites.google.com/inha.ac.kr/orail/professor?authuser=0).
+
 <p align="center">
   <img src="image/main_framework.png" width="1000">
 </p>
