@@ -1,10 +1,13 @@
 import json
+import os, glob
+import sys
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..", "utils")))
+
 import torch
 import torch.nn.functional as F
 from clip import clip
 from internvl_utils import build_transform, dynamic_preprocess
 from decord import VideoReader, cpu
-import os, glob
 from PIL import Image
 import numpy as np
 

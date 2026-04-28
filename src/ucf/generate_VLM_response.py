@@ -1,11 +1,14 @@
+import json
 import os, glob
+import sys
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..", "utils")))
+
 import numpy as np
 import torch
 from PIL import Image
 from decord import VideoReader, cpu
 from transformers import AutoModel, AutoTokenizer
 from internvl_utils import build_transform, dynamic_preprocess
-import json
 import torch.nn.functional as F
 import math
 from tqdm import tqdm
@@ -137,13 +140,13 @@ def test(selected_videos_test, model, tokenizer, generation_config, Prompt_VLM, 
             continue
 
 if __name__ == "__main__":
-    save_name="VLM_responses"
+    save_name="VLM_responses_ucf"
     mllm_path = 'OpenGVLab/InternVL2-8B'
     device = torch.device('cuda:0')
     video_dir = "/path/to/UCF-Crime/videos/"
     test_path = "/path/to/UCF-Crime/Anomaly_Detection_splits/Anomaly_Test.txt"
 
-    with open('P_VLM_format.txt', 'r', encoding='utf-8') as f:
+    with open('../../P_VLM_format.txt', 'r', encoding='utf-8') as f:
         Prompt_VLM = f.read()
 
     model = AutoModel.from_pretrained(mllm_path, torch_dtype=torch.bfloat16, low_cpu_mem_usage=True,

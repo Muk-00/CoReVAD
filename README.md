@@ -47,6 +47,7 @@ In this paper, we use InternVL2, we follow the official installation instruction
 ## Extract CLIP features
 We first CLIP vision features from the dataset.
 ```text
+cd src/ucf
 python extract_clip_features.py
 ```
 Output (UCF-Crime): 

@@ -1,7 +1,10 @@
 import os, json, re, argparse
+import sys
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..", "utils")))
+
 import numpy as np
 import torch
-from sklearn.metrics import roc_auc_score, average_precision_score
+from sklearn.metrics import roc_auc_score
 import clip
 from utils import text_encode, cosine_sim_text_vs_frames
 from decord import VideoReader, cpu
@@ -57,11 +60,13 @@ def gaussian_smooth_1d(data, size=5, sigma=1.0):
     smoothed_data = np.convolve(data, kernel, mode='same')
     return smoothed_data
 
+
 # =========== eval =============
-def process_video(video, clean_response, clip_feature_root_test, vr_len, clip_model, device, tau=0.05, size=9, sigma=5, frame_len=30):
+@torch.no_grad()
+def process_video(video, clean_response, clip_feature_root_test, vr_len, clip_model, device, tau=1.0, size=29, sigma=10, frame_len=30):
 
     npy_path = os.path.join(clip_feature_root_test, f"{video}_CLIP_features.npy")
-    clip_feats = np.load(npy_path).astype(np.float32)  # (T, D)
+    clip_feats = np.load(npy_path).astype(np.float16)  # (T, D)
     T = clip_feats.shape[0]
     R_length = len(clean_response)
 
@@ -107,10 +112,10 @@ def process_video(video, clean_response, clip_feature_root_test, vr_len, clip_mo
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--clip_feature_root_test", default="./CLIP_feats/xd_test")
-    ap.add_argument("--videos_dir",  default="/path/to/XD-Violence/test/")
-    ap.add_argument("--test_list",   default="/path/to/XD-Violence/xd_annotations.json")
-    ap.add_argument("--gt_npy",      default="./gt_xd.npy")
+    ap.add_argument("--clip_feature_root_test", default="./CLIP_feats/ucf_test")
+    ap.add_argument("--videos_dir",  default="/path/to/UCF-Crime/videos")
+    ap.add_argument("--test_list",   default="/path/to/UCF-Crime/Anomaly_Detection_splits/Anomaly_Test.txt")
+    ap.add_argument("--gt_npy",      default="./gt_ucf.npy")
     ap.add_argument("--device",      default="cuda")
     ap.add_argument("--tau", type=float, default=0.05)
     ap.add_argument("--size", type=int, default=9)
@@ -118,33 +123,20 @@ def main():
     ap.add_argument("--frame_len",    type=int, default=30)
     args = ap.parse_args()
 
-    args.texts_json = f"./outputs/VLM_responses_LRC_xd.json"
-    
+    args.texts_json  = f"./outputs/VLM_responses_LRC_ucf.json"
     device = torch.device(args.device if torch.cuda.is_available() else "cpu")
-    clip_model, _ = clip.load("ViT-B/16", device=device) # ViT-B/16
+    clip_model, _ = clip.load("ViT-B/16", device=device)
     clip_model.eval()
 
     vid2texts = load_json(args.texts_json)
 
     with open(args.test_list, 'r', encoding='utf-8') as f:
-        anno_list = json.load(f)
-
-    vid_names = []
-    vid_paths = []
-
-    for item in anno_list:
-        v_raw = item["video"]
-        v_clean = v_raw.replace("#", "")
-        if not v_clean.endswith(".mp4"):
-            v_clean = v_clean + ".mp4"
-        base = os.path.splitext(os.path.basename(v_clean))[0]
-        vpath = os.path.join(args.videos_dir, os.path.basename(v_clean))
-        vid_names.append(base)
-        vid_paths.append(vpath)
+        test_names = [os.path.basename(x.strip()).replace(".mp4","") for x in f]
 
     y_true = np.load(args.gt_npy).astype(np.int8)
     preds = []
-    for vid, vpath in tqdm(zip(vid_names, vid_paths), desc="Processing videos", total=len(vid_names)):
+    for vid in tqdm(test_names, total=len(test_names)):
+        vpath = os.path.join(args.videos_dir, vid + ".mp4")
         vr = VideoReader(vpath, ctx=cpu(0), num_threads=1)
         clean_response = vid2texts[vid]
         y_pred_frames = process_video(video=vid, clean_response=clean_response, clip_feature_root_test=args.clip_feature_root_test, clip_model=clip_model,
@@ -154,8 +146,7 @@ def main():
 
     y_score = np.concatenate(preds, axis=0)
     auroc = roc_auc_score(y_true, y_score)
-    ap1 = average_precision_score(y_true, y_score)
-    print(f"[XD-Violence RESULT] => AUROC={auroc*100:.2f}%, AP={ap1*100:.2f}%")
+    print(f"[UCF-Crime RESULT] => AUROC={auroc*100:.2f}%")
 
 if __name__ == "__main__":
     main()

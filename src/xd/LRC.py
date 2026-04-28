@@ -1,4 +1,7 @@
 import json, os
+import sys
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..", "utils")))
+
 import numpy as np
 import torch
 from tqdm import tqdm
@@ -8,8 +11,8 @@ import clip
 @torch.no_grad()
 def Local_Response_Cleaning(clip_feat_dir, device, window_size=1, frame_len=30):
     
-    response_path = f"./outputs/VLM_responses.json"
-    LRC_path = f"./outputs/VLM_responses_LRC.json"
+    response_path = f"./outputs/VLM_responses_xd.json"
+    LRC_path = f"./outputs/VLM_responses_LRC_xd.json"
 
     # 0) Load
     with open(response_path, "r", encoding="utf-8") as f:
@@ -69,6 +72,6 @@ def Local_Response_Cleaning(clip_feat_dir, device, window_size=1, frame_len=30):
 
 
 if __name__ == "__main__":
-    clip_feat_dir = "./CLIP_feats/ucf_test"
+    clip_feat_dir = "./CLIP_feats/xd_test"
     device = "cuda" if torch.cuda.is_available() else "cpu"
     Local_Response_Cleaning(clip_feat_dir=clip_feat_dir, device=device)
