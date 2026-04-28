@@ -47,17 +47,26 @@ In this paper, we use InternVL2, we follow the official installation instruction
 ## Extract CLIP features
 We first CLIP vision features from the dataset.
 ```text
+For UCF-Crime:
 cd src/ucf
+python extract_clip_features.py
+
+For XD-Violence:
+cd src/xd
 python extract_clip_features.py
 ```
 Output (UCF-Crime): 
 ```text
-CLIP_feats
-    └──ucf_test
+src/ucf/CLIP_feats
+    └── ucf_test
           ├── Abuse028_x264_CLIP_features.npy
           ├── Abuse030_x264_CLIP_features.npy
           └── ...
-    └──xd_test
+```
+Output (XD-Violence): 
+```text
+src/xd/CLIP_feats
+    └── xd_test
           ├── A.Beautiful.Mind.2001__00-25-20_00-29-20_label_A_CLIP_features.npy
           ├── A.Beautiful.Mind.2001__00-40-52_00-42-01_label_A_CLIP_features.npy
           └── ...
@@ -69,7 +78,7 @@ The VLM responses are obtained in JSON format.
 python generate_VLM_response.py
 ```
 ## 2. Local Response Cleaning (LRC)
-The results of Local Response Cleaning (LRC) are saved in JSON format. We provide the generated responses in [`VLM_responses_LRC.json`](outputs/VLM_responses_LRC.json) for UCF-Crime and [`VLM_responses_LRC_xd.json`](outputs/LM_responses_LRC_xd.json) for XD-Violence.
+The results of Local Response Cleaning (LRC) are saved in JSON format. We provide the generated responses in [`VLM_responses_LRC_ucf.json`](src/ucf/outputs/VLM_responses_LRC_ucf.json) for UCF-Crime and [`VLM_responses_LRC_xd.json`](src/xd/outputs/VLM_responses_LRC_xd.json) for XD-Violence.
 ```text
 python LRC.py
 ```
